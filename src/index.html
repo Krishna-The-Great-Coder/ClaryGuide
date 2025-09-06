@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>ClaryGuide</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Clarity Today, Career Tommorow"
+    />
+    <meta property="og:title" content="ClaryGuide" />
+    <meta
+      property="og:description"
+      content="Clarity Today, Career Tommorow"
+    />
+    <meta property="og:image" content="logo.png" />
+    <link rel="icon" href="logo-favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="home">
+    <!-- Header / Nav (shared across pages) -->
+    <header class="site-header">
+        <div class="brand" href="index.html">
+            <div class="logo">
+                <img src="logo-favicon.png" style="height: 35px;">
+            </div>
+            <div class="brand-text">
+                <h1>ClaryGuide</h1>
+                <p class="tag">Clarity Today, Career Tommorow</p>
+            </div>
+        </div>
+
+        <nav class="main-nav" aria-label="Main">
+            <a href="index.html">Home</a>
+            <a href="features.html">Features</a>
+            <a href="chatbot.html">ClaryBot</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+
+        <button id="mobileMenuBtn" class="mobile-menu" aria-label="Open menu">☰</button>
+    </header>
+
+    <!-- Mobile Drawer (shared) -->
+    <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+        <button id="closeDrawer" class="close-drawer" aria-label="Close menu">✕</button>
+        <nav class="drawer-nav">
+            <a href="index.html">Home</a><br>
+            <a href="features.html">Features</a><br>
+            <a href="chatbot.html">ClaryBot</a><br>
+            <a href="about.html">About Us</a><br>
+            <a href="contact.html">Contact Us</a><br>
+        </nav>
+    </div>
+
+    <!-- HERO -->
+    <main>
+        <section class="hero">
+            <div class="hero-left">
+                <h2 class="hero-title" style="padding-bottom: 20px; font-size: 40px;">Find careers that match who you actually are</h2>
+                <p class="lead">AI-assisted guidance, visual roadmaps and college info — reimagined for students.</p>
+
+                <div class="hero-actions">
+                    <a class="btn primary" href="features.html">Explore Features</a>
+                    <a class="btn primary" href="chatbot.html">Talk to ClaryBot</a>
+                </div>
+
+                <div class="mini-cards">
+                    <div class="mini">Path Finder</div>
+                    <div class="mini">Mind Maps</div>
+                    <div class="mini">College Hub</div>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <!-- Animated gradient blob + abstract nodes -->
+                <div class="visual-wrap">
+                    <svg class="visual" viewBox="0 0 400 400" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="heroGrad" x1="0" x2="1">
+                                <stop offset="0" stop-color="#2B8BFF" />
+                                <stop offset="1" stop-color="#00C389" />
+                            </linearGradient>
+                            <filter id="blur">
+                                <feGaussianBlur stdDeviation="18" />
+                            </filter>
+                        </defs>
+                        <g filter="url(#blur)">
+                            <circle cx="200" cy="130" r="120" fill="url(#heroGrad)" opacity="0.28"></circle>
+                            <circle cx="260" cy="220" r="70" fill="#8D44FF" opacity="0.12"></circle>
+                        </g>
+                        <g>
+                            <circle class="node" cx="155" cy="120" r="8" fill="#fff"></circle>
+                            <circle class="node" cx="240" cy="150" r="6" fill="#fff"></circle>
+                            <circle class="node" cx="200" cy="210" r="5" fill="#fff"></circle>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick features preview -->
+        <section class="section quick">
+            <h3 style="padding-bottom: 20px; font-size: 40px;">Why ClaryGuide?</h3>
+            <div class="quick-grid">
+                <article class="qcard">
+                    <h4>Personalized</h4>
+                    <p>Tailored suggestions from simple inputs.</p>
+                </article>
+                <article class="qcard">
+                    <h4>Visual Roadmaps</h4>
+                    <p>Step-by-step timelines to reach a career.</p>
+                </article>
+                <article class="qcard">
+                    <h4>College Hub</h4>
+                    <p>Search colleges & deadlines in one place.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- CTA strip -->
+        <section class="cta-strip" style="text-align: center;">
+            <div class="cta-inner">
+                <h4>Ready to explore?</h4>
+                <a class="btn primary large" href="index.html">Start Now</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Chatbot (shared) -->
+    <button id="botBtn" class="chatbot" aria-label="Open chat">💬</button>
+
+    <div id="chatWindow" class="chat-window" aria-hidden="true">
+        <div class="chat-head">
+            <span>ClaryBot</span>
+            <button id="closeChat" aria-label="Close chat">✕</button>
+        </div>
+        <div id="chatBody" class="chat-body">
+            <div class="bot-msg">Hi! Welcome To ClaryBot</div>
+        </div>
+        <form id="chatForm" class="chat-form" action="javascript:void(0);">
+            <input id="chatInput" placeholder="Type a message..." />
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <!-- Footer (shared) -->
+    <footer class="site-footer" style="background-color: #EEEEEE;">
+        <div class="footer-inner">
+            <div>© <span id="year"></span> ClaryGuide</div>
+            <nav class="footer-links" style="justify-content: space-evenly;">
+                <ul style="list-style: none;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="chatbot.html">ClaryBot</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

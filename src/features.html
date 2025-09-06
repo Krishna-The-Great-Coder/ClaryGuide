@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>ClaryGuide - Features</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Clarity Today, Career Tommorow" />
+    <meta property="og:title" content="ClaryGuide - Features" />
+    <meta property="og:description" content="Clarity Today, Career Tommorow" />
+    <meta property="og:image" content="logo.png" />
+    <link rel="icon" href="logo-favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f3fbfb, #eef9f8);
+            color: #333;
+        }
+
+        header {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #167BF5;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            color: #167BF5;
+        }
+
+        .features-section {
+            padding: 4rem 1.5rem;
+            text-align: center;
+        }
+
+        .features-section h2 {
+            font-size: 2.5rem;
+            color: #167BF5;
+            margin-bottom: 0.5rem;
+        }
+
+        .features-section p {
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Career Comparison */
+        .comparison-section {
+            padding: 3rem 1.5rem;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            max-width: 900px;
+            margin: 0 auto 3rem;
+        }
+
+        .comparison-section h3 {
+            font-size: 2rem;
+            color: #167BF5;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-section select {
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .compare-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(to right, #2B8BFF, #38C6A8);
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .comparison-result {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .career-box {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            text-align: center;
+            background: #fff;
+            border-top: 1px solid #ddd;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .features-section h2 {
+                font-size: 2rem;
+            }
+
+            .comparison-result {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body data-page="features">
+    <header class="site-header">
+        <div class="brand" href="index.html">
+            <div class="logo">
+                <img src="logo-favicon.png" style="height: 35px;">
+            </div>
+            <div class="brand-text">
+                <h1>ClaryGuide</h1>
+                <p class="tag">Features</p>
+            </div>
+        </div>
+        <nav class="main-nav" aria-label="Main">
+            <a href="index.html">Home</a>
+            <a href="features.html">Features</a>
+            <a href="chatbot.html">ClaryBot</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <button id="mobileMenuBtn" class="mobile-menu" aria-label="Open menu">☰</button>
+    </header>
+
+    <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+        <button id="closeDrawer" class="close-drawer" aria-label="Close menu">✕</button>
+        <nav class="drawer-nav">
+            <a href="index.html">Home</a><br>
+            <a href="features.html">Features</a><br>
+            <a href="chatbot.html">ClaryBot</a><br>
+            <a href="about.html">About Us</a><br>
+            <a href="contact.html">Contact Us</a><br>
+        </nav>
+    </div>
+
+    <main>
+        <section class="section">
+            <h3 style="padding-bottom: 20px; font-size: 40px;">Core Features</h3>
+            <p class="subtitle">Designed for different minds</p>
+
+            <!-- On mobile: swipe carousel (CSS + JS enabled). On larger: grid columns -->
+            <div class="features-grid" id="featuresGrid">
+                <article class="feature-card">
+                    <div class="accent left"></div>
+                    <h4>Career Path Finder</h4>
+                    <p>Discover career options based on simple inputs.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="accent green"></div>
+                    <h4>Mind Maps</h4>
+                    <p>Visual skill & study roadmaps to achieve goals.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="accent teal"></div>
+                    <h4>College & Jobs Hub</h4>
+                    <p>Filter colleges & entry timelines quickly.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="accent purple"></div>
+                    <h4>Compare Careers</h4>
+                    <p>Side-by-side analysis of choices & outcomes.</p>
+                </article>
+            </div>
+        </section>
+
+            <!-- Career Comparison Tool -->
+            <div class="comparison-section" style="text-align: center;">
+                <h3>Career Comparison Tool</h3>
+                <p>Select two careers to compare their scope, skills, and opportunities.</p>
+
+                <select id="career1">
+                    <option value="engineer">Engineer</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="designer">Designer</option>
+                    <option value="lawyer">Lawyer</option>
+                </select>
+
+                <select id="career2">
+                    <option value="doctor">Doctor</option>
+                    <option value="engineer">Engineer</option>
+                    <option value="designer">Designer</option>
+                    <option value="lawyer">Lawyer</option>
+                </select>
+
+                <br>
+                <button class="compare-btn" onclick="compareCareers()">Compare</button>
+
+                <div id="comparison-result" class="comparison-result"></div>
+            </div>
+        </section>
+
+        <section class="section demo-split">
+            <div class="left">
+                <h3 style="padding-bottom: 20px; font-size: 40px;">What Next In ClaryGuide?</h3>
+                <ul>
+                    <li>1-on-1 Career Counselling Sessions</li>
+                    <li>Interactive Career Quiz</li>
+                    <li>College & Job Database</li>
+                    <li>ClaryGuide Mobile App</li>
+                </ul>
+            </div>
+            <div class="right">
+                <!-- small demo visual -->
+                <div class="mock-device" style="text-align: center; display: flex;">
+                    <img src="Mentorship.png" style="height: 200px;">
+                    <div style="font-size: 35px; font-family: sans-serif;">1-on-1<br> Career Counselling<br> Sessions
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="botBtn" class="chatbot" aria-label="Open chat">💬</button>
+    <div id="chatWindow" class="chat-window" aria-hidden="true">
+        <div class="chat-head">
+            <span>ClaryBot</span>
+            <button id="closeChat" aria-label="Close chat">✕</button>
+        </div>
+        <div id="chatBody" class="chat-body">
+            <div class="bot-msg">Hi! Welcome To ClaryBot</div>
+        </div>
+        <form id="chatForm" class="chat-form" action="javascript:void(0);">
+            <input id="chatInput" placeholder="Type..." />
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <footer class="site-footer" style="background-color: #EEEEEE;">
+        <div class="footer-inner">
+            <div>© <span id="year"></span> ClaryGuide</div>
+            <nav class="footer-links">
+                <ul style="list-style: none;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="chatbot.html">ClaryBot</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const data = {
+            engineer: {
+                title: "Engineer",
+                scope: "Technology, infrastructure, software, manufacturing.",
+                skills: "Problem solving, mathematics, programming, design thinking.",
+                opportunities: "IT companies, R&D, startups, government projects."
+            },
+            doctor: {
+                title: "Doctor",
+                scope: "Healthcare, hospitals, research, clinics.",
+                skills: "Medical knowledge, empathy, critical thinking, decision making.",
+                opportunities: "Hospitals, private practice, research labs, pharma."
+            },
+            designer: {
+                title: "Designer",
+                scope: "Creative industries, digital media, product design.",
+                skills: "Creativity, tools like Figma/Photoshop, UX thinking.",
+                opportunities: "Design studios, startups, freelancing, corporates."
+            },
+            lawyer: {
+                title: "Lawyer",
+                scope: "Legal practice, corporate law, judiciary.",
+                skills: "Legal knowledge, analytical thinking, communication.",
+                opportunities: "Law firms, corporates, courts, consultancy."
+            }
+        };
+
+        function compareCareers() {
+            const c1 = document.getElementById("career1").value;
+            const c2 = document.getElementById("career2").value;
+
+            const resultDiv = document.getElementById("comparison-result");
+            resultDiv.innerHTML = `
+        <div class="career-box">
+          <h4>${data[c1].title}</h4>
+          <p><b>Scope:</b> ${data[c1].scope}</p>
+          <p><b>Skills:</b> ${data[c1].skills}</p>
+          <p><b>Opportunities:</b> ${data[c1].opportunities}</p>
+        </div>
+        <div class="career-box">
+          <h4>${data[c2].title}</h4>
+          <p><b>Scope:</b> ${data[c2].scope}</p>
+          <p><b>Skills:</b> ${data[c2].skills}</p>
+          <p><b>Opportunities:</b> ${data[c2].opportunities}</p>
+        </div>
+      `;
+        }
+    </script>
+</body>
+
+</html>
