@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>ClaryGuide - Contact Us</title>
+    <title>ClaryGuide - Mentor Connect</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Clarity Today, Career Tommorow" />
@@ -130,6 +130,39 @@
                 font-size: 2rem;
             }
         }
+
+        /* Date Dropdown Styles (Matches Input Boxes) */
+        .styled-select {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #555;
+            outline: none;
+            transition: border 0.3s;
+            background-color: white;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='12'%20height='12'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23666'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpolyline%20points='6%209%2012%2015%2018%209'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1rem;
+            cursor: pointer;
+        }
+
+        .styled-select:focus {
+            border: 1px solid #167BF5;
+        }
+
+        /* Placeholder (first option) look */
+        .styled-select option[disabled] {
+            color: #999;
+            font-weight: normal;
+            font-style: italic;
+        }
     </style>
 </head>
 
@@ -143,7 +176,7 @@
             </div>
             <div class="brand-text">
                 <h1>ClaryGuide</h1>
-                <p class="tag">Contact Us</p>
+                <p class="tag">Mentor Connect</p>
             </div>
         </div>
 
@@ -152,7 +185,7 @@
             <a href="features.html">Features</a>
             <a href="chatbot.html">ClaryBot</a>
             <a href="about.html">About Us</a>
-            <a href="contact.html" style="color: #06274f;"><b>Contact Us</b></a>
+            <a href="contact.html">Contact Us</a>
         </nav>
 
         <button id="mobileMenuBtn" class="mobile-menu" aria-label="Open menu">☰</button>
@@ -166,20 +199,39 @@
             <a href="features.html">Features</a><br>
             <a href="chatbot.html">ClaryBot</a><br>
             <a href="about.html">About Us</a><br>
-            <a href="contact.html" style="color: #06274f;"><b>Contact Us</b></a><br>
+            <a href="contact.html">Contact Us</a><br>
         </nav>
     </div>
 
     <!-- Contact Section -->
     <section class="contact-section">
-        <h2 style="padding-bottom: 20px; margin-top: 0; padding-top: 0;">Contact Us</h2>
-        <form action="https://formbold.com/s/3Z4kJ" method="POST" class="contact-form">
+        <h2 style="padding-bottom: 20px; margin-top: 0; padding-top: 0;">Connect with our Mentor</h2>
+        <form action="https://formbold.com/s/3nKKM" method="POST" class="contact-form">
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
+            <input type="tel" placeholder="Your Mobile Number" name="phone" fdprocessedid="bzetso" required>
+            <select name="mentor-date" id="mentor-date" class="styled-select" required>
+                <option value="" disabled selected>Select Date</option>
+            </select>
+            <select id="time-slot" name="time-slot" class="styled-select" required>
+                <option value="" disabled selected>Select Time Slot</option>
+            </select>
+            <select class="styled-select" name="mentorship-area" required>
+                <option value="">Select an Area</option>
+                <option value="career">Career Guidance</option>
+                <option value="admission">College Admission</option>
+                <option value="subject">Subject Help</option>
+                <option value="project">Project Guidance</option>
+                <option value="other">Other</option>
+            </select>
+            <textarea id="about" name="about" rows="3" placeholder="Write a short intro about you..."
+                required></textarea>
+            <textarea id="reason" name="reason" rows="4" placeholder="Explain what you need help with..."
+                required></textarea>
+            <button type="submit">Send Request</button>
         </form>
     </section>
+
 
     <!-- Footer -->
     <footer class="site-footer" style="background-color: #EEEEEE;">
@@ -196,6 +248,66 @@
             </nav>
         </div>
     </footer>
+
+    <script>
+        const dateSelect = document.getElementById("mentor-date");
+        const timeSlotSelect = document.getElementById("time-slot");
+
+        // Populate dates for next 7 days
+        const today = new Date();
+        for (let i = 0; i < 7; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() + i);
+            const value = date.toISOString().split('T')[0];
+            const label = date.toLocaleDateString("en-US", {
+                weekday: 'long',
+                month: 'short',
+                day: 'numeric'
+            });
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = label;
+            dateSelect.appendChild(option);
+        }
+
+        // Generate time slots based on selected date
+        dateSelect.addEventListener("change", function () {
+            generateTimeSlots(this.value);
+        });
+
+        function generateTimeSlots(selectedDate) {
+            timeSlotSelect.innerHTML = '<option value="" disabled selected>Select Time Slot</option>';
+            const now = new Date();
+            const dateObj = new Date(selectedDate);
+
+            const startHour = 9;
+            const endHour = 20;
+
+            for (let hour = startHour; hour < endHour; hour++) {
+                const slotStart = new Date(dateObj);
+                slotStart.setHours(hour, 0, 0, 0);
+                const slotEnd = new Date(dateObj);
+                slotEnd.setHours(hour + 1, 0, 0, 0);
+
+                if (slotStart > now || dateObj.toDateString() !== now.toDateString()) {
+                    const label = `${formatTime(slotStart)} - ${formatTime(slotEnd)}`;
+                    const option = document.createElement("option");
+                    option.value = label;
+                    option.textContent = label;
+                    timeSlotSelect.appendChild(option);
+                }
+            }
+        }
+
+        function formatTime(date) {
+            let hours = date.getHours();
+            const minutes = date.getMinutes().toString().padStart(2, "0");
+            const ampm = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12 || 12;
+            return `${hours}:${minutes} ${ampm}`;
+        }
+    </script>
+
 
 </body>
 
