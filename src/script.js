@@ -8,7 +8,93 @@
    - simple swipe for features on mobile
 */
 
+// Firebase config 
+const firebaseConfig = {
+  apiKey: "AIzaSyBPgF0eZpGKOt35or9KX7Yx0FqLh2DhZeg",
+  authDomain: "claryguide-2e0e6.firebaseapp.com",
+  databaseURL: "https://claryguide-2e0e6-default-rtdb.firebaseio.com/",
+  projectId: "claryguide-2e0e6",
+  storageBucket: "claryguide-2e0e6.firebasestorage.app",
+  messagingSenderId: "998554914908",
+  appId: "1:998554914908:web:e92af109ff65db87eb5699",
+  measurementId: "G-0BWDK4P3LE"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
 document.addEventListener('DOMContentLoaded', function () {
+  // AUTH: Register
+  const registerForm = document.getElementById('registerForm');
+  if (registerForm) {
+    registerForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const name = document.getElementById('registerName').value.trim();
+      const email = document.getElementById('registerEmail').value.trim();
+      const phone = document.getElementById('registerPhone').value.trim();
+      const password = document.getElementById('registerPassword').value;
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        await userCredential.user.updateProfile({ displayName: name });
+        // Save user data to Realtime Database
+        await db.ref('users/' + userCredential.user.uid).set({
+          name: name,
+          email: email,
+          phone: phone,
+          provider: 'email',
+          createdAt: new Date().toISOString()
+        });
+        window.location.href = "index.html";
+      } catch (error) {
+        document.getElementById('registerError').innerText = error.message;
+      }
+    });
+    // Google Register
+    document.getElementById('googleRegisterBtn')?.addEventListener('click', async () => {
+      const googleProvider = new firebase.auth.GoogleAuthProvider();
+      try {
+        const result = await auth.signInWithPopup(googleProvider);
+        const user = result.user;
+        // Save user data to Realtime Database
+        await db.ref('users/' + user.uid).set({
+          name: user.displayName || '',
+          email: user.email || '',
+          phone: user.phoneNumber || '',
+          provider: 'google',
+          createdAt: new Date().toISOString()
+        });
+        window.location.href = "index.html";
+      } catch (error) {
+        document.getElementById('registerError').innerText = error.message;
+      }
+    });
+  }
+
+  // AUTH: Login
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        window.location.href = "index.html";
+      } catch (error) {
+        document.getElementById('loginError').innerText = error.message;
+      }
+    });
+    // Google Login
+    document.getElementById('googleLoginBtn')?.addEventListener('click', async () => {
+      const googleProvider = new firebase.auth.GoogleAuthProvider();
+      try {
+        await auth.signInWithPopup(googleProvider);
+        window.location.href = "index.html";
+      } catch (error) {
+        document.getElementById('loginError').innerText = error.message;
+      }
+    });
+  }
   // show year in footer
   const yearEls = document.querySelectorAll('#year');
   yearEls.forEach(el => el.textContent = new Date().getFullYear());
@@ -123,3 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fg.addEventListener('mousemove', (e)=> { if(!isDown) return; const x=e.pageX - fg.offsetLeft; fg.scrollLeft = scrollLeft + (startX - x) });
   }
 });
+
+
+
+

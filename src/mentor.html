@@ -206,17 +206,13 @@
     <!-- Contact Section -->
     <section class="contact-section">
         <h2 style="padding-bottom: 20px; margin-top: 0; padding-top: 0;">Connect with our Mentor</h2>
-        <form action="https://formbold.com/s/3nKKM" method="POST" class="contact-form">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <input type="tel" placeholder="Your Mobile Number" name="phone" fdprocessedid="bzetso" required>
-            <select name="mentor-date" id="mentor-date" class="styled-select" required>
-                <option value="" disabled selected>Select Date</option>
-            </select>
-            <select id="time-slot" name="time-slot" class="styled-select" required>
-                <option value="" disabled selected>Select Time Slot</option>
-            </select>
-            <select class="styled-select" name="mentorship-area" required>
+        <form id="mentorForm" class="contact-form">
+            <input type="text" name="name" id="mentorName" placeholder="Your Name" required>
+            <input type="email" name="email" id="mentorEmail" placeholder="Your Email" required>
+            <input type="tel" name="phone" id="mentorPhone" placeholder="Your Mobile Number" required>
+            <input type="date" name="mentor-date" id="mentor-date" class="styled-select" required>
+            <input type="time" id="time-slot" name="time-slot" class="styled-select" required>
+            <select class="styled-select" name="mentorship-area" id="mentorArea" required>
                 <option value="">Select an Area</option>
                 <option value="career">Career Guidance</option>
                 <option value="admission">College Admission</option>
@@ -224,11 +220,11 @@
                 <option value="project">Project Guidance</option>
                 <option value="other">Other</option>
             </select>
-            <textarea id="about" name="about" rows="3" placeholder="Write a short intro about you..."
-                required></textarea>
-            <textarea id="reason" name="reason" rows="4" placeholder="Explain what you need help with..."
-                required></textarea>
+            <textarea id="about" name="about" rows="3" placeholder="Write a short intro about you..." required></textarea>
+            <textarea id="reason" name="reason" rows="4" placeholder="Explain what you need help with..." required></textarea>
             <button type="submit">Send Request</button>
+            <div id="mentorSuccess" style="color:green;margin-top:10px;"></div>
+            <div id="mentorError" style="color:red;margin-top:10px;"></div>
         </form>
     </section>
 
@@ -249,7 +245,56 @@
         </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js"></script>
     <script>
+        // Firebase config (reuse from script.js)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPgF0eZpGKOt35or9KX7Yx0FqLh2DhZeg",
+            authDomain: "claryguide-2e0e6.firebaseapp.com",
+            databaseURL: "https://claryguide-2e0e6-default-rtdb.firebaseio.com/",
+            projectId: "claryguide-2e0e6",
+            storageBucket: "claryguide-2e0e6.firebasestorage.app",
+            messagingSenderId: "998554914908",
+            appId: "1:998554914908:web:e92af109ff65db87eb5699",
+            measurementId: "G-0BWDK4P3LE"
+        };
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.database();
+        // Mentor form submission
+        document.getElementById('mentorForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('mentorName').value.trim();
+            const email = document.getElementById('mentorEmail').value.trim();
+            const phone = document.getElementById('mentorPhone').value.trim();
+            const date = document.getElementById('mentor-date').value;
+            const timeSlot = document.getElementById('time-slot').value;
+            const area = document.getElementById('mentorArea').value;
+            const about = document.getElementById('about').value.trim();
+            const reason = document.getElementById('reason').value.trim();
+            const requestData = {
+                name,
+                email,
+                phone,
+                date,
+                timeSlot,
+                area,
+                about,
+                reason,
+                requestedAt: new Date().toISOString()
+            };
+            try {
+                await db.ref('request').push(requestData);
+                document.getElementById('mentorSuccess').innerText = 'Request sent successfully!';
+                document.getElementById('mentorError').innerText = '';
+                document.getElementById('mentorForm').reset();
+            } catch (err) {
+                document.getElementById('mentorError').innerText = 'Error sending request. Please try again.';
+                document.getElementById('mentorSuccess').innerText = '';
+            }
+        });
         const dateSelect = document.getElementById("mentor-date");
         const timeSlotSelect = document.getElementById("time-slot");
 
