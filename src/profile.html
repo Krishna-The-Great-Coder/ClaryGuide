@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile - ClaryGuide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="firebaseConfig.js"></script>
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <div id="profileCard" class="row justify-content-center"></div>
+  </div>
+  <script>
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+
+    function renderProfile(user, userData) {
+      const card = document.createElement('div');
+      card.className = 'col-md-6';
+      card.innerHTML = `
+        <div class="card shadow">
+          <div class="card-body">
+            <h3 class="mb-4 text-center">Your Profile</h3>
+            <div class="mb-3"><strong>Name:</strong> <span id="profileName">${userData.name || user.displayName || ''}</span></div>
+            <div class="mb-3"><strong>Email:</strong> <span id="profileEmail">${userData.email || user.email || ''}</span></div>
+            <div class="mb-3"><strong>Phone:</strong> <span id="profilePhone">${userData.phone || ''}</span></div>
+            <form id="updateForm" class="mt-4">
+              <div class="mb-3">
+                <label class="form-label">Update Phone Number</label>
+                <input type="tel" class="form-control" id="updatePhone" value="${userData.phone || ''}" placeholder="Enter phone number">
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+              <div id="updateMsg" class="mt-2"></div>
+            </form>
+            <button id="logoutBtn" class="btn btn-danger mt-3">Logout</button>
+          </div>
+        </div>
+      `;
+      document.getElementById('profileCard').appendChild(card);
+      document.getElementById('logoutBtn').onclick = function() {
+        auth.signOut().then(() => window.location.href = 'login.html');
+      };
+      document.getElementById('updateForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const newPhone = document.getElementById('updatePhone').value.trim();
+        if (!newPhone) {
+          document.getElementById('updateMsg').innerText = 'Phone number required.';
+          return;
+        }
+        try {
+          await db.ref('users/' + user.uid).update({ phone: newPhone });
+          document.getElementById('profilePhone').innerText = newPhone;
+          document.getElementById('updateMsg').innerText = 'Phone updated!';
+        } catch (err) {
+          document.getElementById('updateMsg').innerText = 'Error updating phone.';
+        }
+      };
+    }
+
+    auth.onAuthStateChanged(async function(user) {
+      const cardDiv = document.getElementById('profileCard');
+      cardDiv.innerHTML = '';
+      if (!user) {
+        cardDiv.innerHTML = `<div class='col-md-6'><div class='card shadow'><div class='card-body text-center'><h4>Please <a href='login.html'>Login</a> or <a href='register.html'>Register</a> to view your profile.</h4></div></div></div>`;
+        return;
+      }
+      // Get user data from DB
+      const userSnap = await db.ref('users/' + user.uid).get();
+      const userData = userSnap.exists() ? userSnap.val() : { email: user.email, name: user.displayName };
+      renderProfile(user, userData);
+    });
+  </script>
+</body>
+</html>

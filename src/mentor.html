@@ -184,6 +184,7 @@
             <a href="index.html">Home</a>
             <a href="features.html">Features</a>
             <a href="chatbot.html">ClaryBot</a>
+            <a href="mentor.html">Mentor</a>
             <a href="about.html">About Us</a>
             <a href="contact.html">Contact Us</a>
         </nav>
@@ -313,15 +314,33 @@
                 requestedAt: new Date().toISOString()
             };
             try {
-                await db.ref('request').push(requestData);
+                const ref = await db.ref('request').push(requestData);
                 document.getElementById('mentorSuccess').innerText = 'Request sent successfully!';
                 document.getElementById('mentorError').innerText = '';
-                document.getElementById('mentorForm').reset();
+                // Hide form and show request data
+                document.getElementById('mentorForm').style.display = 'none';
+                showSingleRequest(requestData);
             } catch (err) {
                 document.getElementById('mentorError').innerText = 'Error sending request. Please try again.';
                 document.getElementById('mentorSuccess').innerText = '';
             }
         });
+
+        function showSingleRequest(req) {
+            const userRequestsDiv = document.getElementById('userRequests');
+            userRequestsDiv.innerHTML = `<h5>Your Request</h5>
+                <div class="card mb-2"><div class="card-body">
+                    <strong>Name:</strong> ${req.name || ''} <br>
+                    <strong>Email:</strong> ${req.email || ''} <br>
+                    <strong>Phone:</strong> ${req.phone || ''} <br>
+                    <strong>Date:</strong> ${req.date || ''} <br>
+                    <strong>Time:</strong> ${req.timeSlot || ''} <br>
+                    <strong>Area:</strong> ${req.area || ''} <br>
+                    <strong>About:</strong> ${req.about || ''} <br>
+                    <strong>Reason:</strong> ${req.reason || ''} <br>
+                    <strong>Status:</strong> <span style="font-weight:bold;color:#888">Pending</span>
+                </div></div>`;
+        }
     </script>
 
 
