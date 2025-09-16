@@ -1,45 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
     <title>Interactive Career Quiz - ClaryGuide</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Clarity Today, Career Tommorow" />
+    <meta property="og:title" content="ClaryGuide" />
+    <meta property="og:description" content="Clarity Today, Career Tommorow" />
+    <meta property="og:image" content="logo.png" />
+    <link rel="icon" href="logo-favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="style.css">
     <style>
-        body { background: linear-gradient(135deg, #f3fbfb, #eef9f8); }
-        .quiz-container { max-width: 600px; margin: 3rem auto; background: #fff; border-radius: 16px; box-shadow: 0 2px 16px #167bf51a; padding: 2rem; }
-        h2 { color: #167BF5; }
-        .question { margin-bottom: 1.5rem; }
-        .result { background: #eaf6ff; border-radius: 10px; padding: 1.5rem; margin-top: 2rem; }
-        .confidence { font-weight: bold; color: #38C6A8; }
-        .stream { font-size: 1.3rem; font-weight: bold; color: #167BF5; }
-        .btn { background: linear-gradient(to right, #2B8BFF, #38C6A8); color: #fff; border: none; border-radius: 50px; padding: 0.7rem 2rem; font-size: 1rem; cursor: pointer; }
-        .btn:hover { opacity: 0.9; }
+        body {
+            background: linear-gradient(135deg, #f3fbfb, #eef9f8);
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px #167bf51a;
+            padding: 2rem;
+        }
+
+        h2 {
+            color: #167BF5;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+        }
+
+        .result {
+            background: #eaf6ff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .confidence {
+            font-weight: bold;
+            color: #38C6A8;
+        }
+
+        .stream {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #167BF5;
+        }
+
+        .btn {
+            background: linear-gradient(to right, #2B8BFF, #38C6A8);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 0.7rem 2rem;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
+
 <body>
-         <header class="site-header">
-    <div class="brand">
-      <div class="logo">
-        <img src="logo-favicon.png" style="height: 35px;">
-      </div>
-      <div class="brand-text">
-        <h1>ClaryGuide</h1>
-        <p class="tag">Clarybot</p>
-      </div>
-    </div>
-    <nav class="main-nav" aria-label="Main">
-  <a href="index.html">Home</a>
-  <a href="features.html">Features</a>
-  <a href="quiz.html">Career Quiz</a>
-  <a href="chatbot.html">Clarybot</a>
-    <a href="mentor.html">Mentor</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-    </nav>
-    <button id="mobileMenuBtn" class="mobile-menu" aria-label="Open menu">☰</button>
-  </header>
-        <div class="quiz-container">
+    <header class="site-header">
+        <div class="brand">
+            <div class="logo">
+                <img src="logo-favicon.png" style="height: 35px;">
+            </div>
+            <div class="brand-text">
+                <h1>ClaryGuide</h1>
+                <p class="tag">Clarybot</p>
+            </div>
+        </div>
+        <nav class="main-nav" aria-label="Main">
+            <a href="index.html">Home</a>
+            <a href="features.html">Features</a>
+            <a href="chatbot.html">Clarybot</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <button id="mobileMenuBtn" class="mobile-menu" aria-label="Open menu">☰</button>
+    </header>
+    <div class="quiz-container">
         <h2>Interactive Career Quiz</h2>
         <form id="careerQuiz">
             <div class="question">
@@ -75,130 +123,150 @@
         <div id="quizResult" class="result" style="display:none;"></div>
     </div>
     <script>
-                // 10 sets of 10 questions each, with options mapped to streams
-                const quizSets = [
-                    [
-                        { q: "Which subject do you enjoy most?", options: [
-                            { t: "Science/Math", v: "science" },
-                            { t: "Arts/Literature", v: "arts" },
-                            { t: "Business/Economics", v: "commerce" },
-                            { t: "Technology/Practical Skills", v: "vocational" }
-                        ] },
-                        { q: "Do you prefer working with numbers, words, people, or machines?", options: [
-                            { t: "Numbers", v: "science" },
-                            { t: "Words", v: "arts" },
-                            { t: "People", v: "commerce" },
-                            { t: "Machines", v: "vocational" }
-                        ] },
-                        { q: "What type of activities excite you?", options: [
-                            { t: "Experiments", v: "science" },
-                            { t: "Creative arts", v: "arts" },
-                            { t: "Business planning", v: "commerce" },
-                            { t: "Hands-on work", v: "vocational" }
-                        ] },
-                        { q: "Which career sounds most appealing?", options: [
-                            { t: "Doctor/Engineer", v: "science" },
-                            { t: "Artist/Writer", v: "arts" },
-                            { t: "Accountant/Manager", v: "commerce" },
-                            { t: "Technician/Chef", v: "vocational" }
-                        ] },
-                        { q: "How do you solve problems?", options: [
-                            { t: "Logically", v: "science" },
-                            { t: "Creatively", v: "arts" },
-                            { t: "Practically", v: "commerce" },
-                            { t: "Technically", v: "vocational" }
-                        ] },
-                        { q: "What is your favorite school project?", options: [
-                            { t: "Science fair", v: "science" },
-                            { t: "Art exhibition", v: "arts" },
-                            { t: "Business simulation", v: "commerce" },
-                            { t: "Workshop", v: "vocational" }
-                        ] },
-                        { q: "Which skill describes you best?", options: [
-                            { t: "Analytical", v: "science" },
-                            { t: "Imaginative", v: "arts" },
-                            { t: "Organized", v: "commerce" },
-                            { t: "Technical", v: "vocational" }
-                        ] },
-                        { q: "What motivates you?", options: [
-                            { t: "Discovery", v: "science" },
-                            { t: "Expression", v: "arts" },
-                            { t: "Success", v: "commerce" },
-                            { t: "Building", v: "vocational" }
-                        ] },
-                        { q: "Which club would you join?", options: [
-                            { t: "Science", v: "science" },
-                            { t: "Drama", v: "arts" },
-                            { t: "Commerce", v: "commerce" },
-                            { t: "Robotics", v: "vocational" }
-                        ] },
-                        { q: "What is your future goal?", options: [
-                            { t: "Innovate", v: "science" },
-                            { t: "Inspire", v: "arts" },
-                            { t: "Lead", v: "commerce" },
-                            { t: "Create", v: "vocational" }
-                        ] }
-                    ],
-                    // ... 9 more sets omitted for brevity, but will be included in the actual patch ...
-                ];
+        // 10 sets of 10 questions each, with options mapped to streams
+        const quizSets = [
+            [
+                {
+                    q: "Which subject do you enjoy most?", options: [
+                        { t: "Science/Math", v: "science" },
+                        { t: "Arts/Literature", v: "arts" },
+                        { t: "Business/Economics", v: "commerce" },
+                        { t: "Technology/Practical Skills", v: "vocational" }
+                    ]
+                },
+                {
+                    q: "Do you prefer working with numbers, words, people, or machines?", options: [
+                        { t: "Numbers", v: "science" },
+                        { t: "Words", v: "arts" },
+                        { t: "People", v: "commerce" },
+                        { t: "Machines", v: "vocational" }
+                    ]
+                },
+                {
+                    q: "What type of activities excite you?", options: [
+                        { t: "Experiments", v: "science" },
+                        { t: "Creative arts", v: "arts" },
+                        { t: "Business planning", v: "commerce" },
+                        { t: "Hands-on work", v: "vocational" }
+                    ]
+                },
+                {
+                    q: "Which career sounds most appealing?", options: [
+                        { t: "Doctor/Engineer", v: "science" },
+                        { t: "Artist/Writer", v: "arts" },
+                        { t: "Accountant/Manager", v: "commerce" },
+                        { t: "Technician/Chef", v: "vocational" }
+                    ]
+                },
+                {
+                    q: "How do you solve problems?", options: [
+                        { t: "Logically", v: "science" },
+                        { t: "Creatively", v: "arts" },
+                        { t: "Practically", v: "commerce" },
+                        { t: "Technically", v: "vocational" }
+                    ]
+                },
+                {
+                    q: "What is your favorite school project?", options: [
+                        { t: "Science fair", v: "science" },
+                        { t: "Art exhibition", v: "arts" },
+                        { t: "Business simulation", v: "commerce" },
+                        { t: "Workshop", v: "vocational" }
+                    ]
+                },
+                {
+                    q: "Which skill describes you best?", options: [
+                        { t: "Analytical", v: "science" },
+                        { t: "Imaginative", v: "arts" },
+                        { t: "Organized", v: "commerce" },
+                        { t: "Technical", v: "vocational" }
+                    ]
+                },
+                {
+                    q: "What motivates you?", options: [
+                        { t: "Discovery", v: "science" },
+                        { t: "Expression", v: "arts" },
+                        { t: "Success", v: "commerce" },
+                        { t: "Building", v: "vocational" }
+                    ]
+                },
+                {
+                    q: "Which club would you join?", options: [
+                        { t: "Science", v: "science" },
+                        { t: "Drama", v: "arts" },
+                        { t: "Commerce", v: "commerce" },
+                        { t: "Robotics", v: "vocational" }
+                    ]
+                },
+                {
+                    q: "What is your future goal?", options: [
+                        { t: "Innovate", v: "science" },
+                        { t: "Inspire", v: "arts" },
+                        { t: "Lead", v: "commerce" },
+                        { t: "Create", v: "vocational" }
+                    ]
+                }
+            ],
+            // ... 9 more sets omitted for brevity, but will be included in the actual patch ...
+        ];
 
-                // Add the other 9 sets here (omitted for brevity in this preview)
+        // Add the other 9 sets here (omitted for brevity in this preview)
 
-                // Pick a random set
-                const selectedSet = quizSets[Math.floor(Math.random() * quizSets.length)];
-                // Render quiz form
-                const quizForm = document.getElementById('careerQuiz');
-                quizForm.innerHTML = '';
-                selectedSet.forEach((qObj, idx) => {
-                    const qDiv = document.createElement('div');
-                    qDiv.className = 'question';
-                    qDiv.innerHTML = `<label>${idx + 1}. ${qObj.q}</label><br>`;
-                    qObj.options.forEach(opt => {
-                        qDiv.innerHTML += `<input type="radio" name="q${idx}" value="${opt.v}" required> ${opt.t}<br>`;
-                    });
-                    quizForm.appendChild(qDiv);
-                });
-                const submitBtn = document.createElement('button');
-                submitBtn.type = 'submit';
-                submitBtn.className = 'btn';
-                submitBtn.textContent = 'See My Recommendation';
-                quizForm.appendChild(submitBtn);
+        // Pick a random set
+        const selectedSet = quizSets[Math.floor(Math.random() * quizSets.length)];
+        // Render quiz form
+        const quizForm = document.getElementById('careerQuiz');
+        quizForm.innerHTML = '';
+        selectedSet.forEach((qObj, idx) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'question';
+            qDiv.innerHTML = `<label>${idx + 1}. ${qObj.q}</label><br>`;
+            qObj.options.forEach(opt => {
+                qDiv.innerHTML += `<input type="radio" name="q${idx}" value="${opt.v}" required> ${opt.t}<br>`;
+            });
+            quizForm.appendChild(qDiv);
+        });
+        const submitBtn = document.createElement('button');
+        submitBtn.type = 'submit';
+        submitBtn.className = 'btn';
+        submitBtn.textContent = 'See My Recommendation';
+        quizForm.appendChild(submitBtn);
 
-                const resultDiv = document.getElementById('quizResult');
-                quizForm.onsubmit = function(e) {
-                    e.preventDefault();
-                    let scores = { science: 0, arts: 0, commerce: 0, vocational: 0 };
-                    for (let i = 0; i < selectedSet.length; i++) {
-                        const val = quizForm[`q${i}`].value;
-                        scores[val] += 1;
-                    }
-                    let bestStream = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
-                    let confidence = Math.round((scores[bestStream] / selectedSet.length) * 100);
-                    const recommendations = {
-                        science: {
-                            why: "You love logic, experiments, and solving real-world problems. Science opens doors to innovation and discovery!",
-                            careers: "Engineer, Doctor, Scientist, IT Professional, Researcher",
-                            studies: "BSc, BTech, MBBS, MSc, Engineering, Medical, Computer Science"
-                        },
-                        arts: {
-                            why: "Your creativity and imagination shine! Arts lets you express yourself and impact society through culture and ideas.",
-                            careers: "Artist, Writer, Designer, Teacher, Journalist, Psychologist",
-                            studies: "BA, BFA, MA, Literature, Fine Arts, Social Sciences"
-                        },
-                        commerce: {
-                            why: "You have a knack for business, organization, and practical thinking. Commerce is the gateway to the world of finance and entrepreneurship!",
-                            careers: "Accountant, Entrepreneur, Banker, Manager, CA, Economist",
-                            studies: "BCom, BBA, MBA, CA, Economics, Finance"
-                        },
-                        vocational: {
-                            why: "You enjoy hands-on work and technical skills. Vocational streams offer direct paths to skilled careers and technical expertise!",
-                            careers: "Technician, Electrician, Chef, Mechanic, Paramedic, ITI jobs",
-                            studies: "Diploma, ITI, Polytechnic, Hotel Management, Paramedical"
-                        }
-                    };
-                    const rec = recommendations[bestStream];
-                    resultDiv.style.display = 'block';
-                    resultDiv.innerHTML = `
+        const resultDiv = document.getElementById('quizResult');
+        quizForm.onsubmit = function (e) {
+            e.preventDefault();
+            let scores = { science: 0, arts: 0, commerce: 0, vocational: 0 };
+            for (let i = 0; i < selectedSet.length; i++) {
+                const val = quizForm[`q${i}`].value;
+                scores[val] += 1;
+            }
+            let bestStream = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            let confidence = Math.round((scores[bestStream] / selectedSet.length) * 100);
+            const recommendations = {
+                science: {
+                    why: "You love logic, experiments, and solving real-world problems. Science opens doors to innovation and discovery!",
+                    careers: "Engineer, Doctor, Scientist, IT Professional, Researcher",
+                    studies: "BSc, BTech, MBBS, MSc, Engineering, Medical, Computer Science"
+                },
+                arts: {
+                    why: "Your creativity and imagination shine! Arts lets you express yourself and impact society through culture and ideas.",
+                    careers: "Artist, Writer, Designer, Teacher, Journalist, Psychologist",
+                    studies: "BA, BFA, MA, Literature, Fine Arts, Social Sciences"
+                },
+                commerce: {
+                    why: "You have a knack for business, organization, and practical thinking. Commerce is the gateway to the world of finance and entrepreneurship!",
+                    careers: "Accountant, Entrepreneur, Banker, Manager, CA, Economist",
+                    studies: "BCom, BBA, MBA, CA, Economics, Finance"
+                },
+                vocational: {
+                    why: "You enjoy hands-on work and technical skills. Vocational streams offer direct paths to skilled careers and technical expertise!",
+                    careers: "Technician, Electrician, Chef, Mechanic, Paramedic, ITI jobs",
+                    studies: "Diploma, ITI, Polytechnic, Hotel Management, Paramedical"
+                }
+            };
+            const rec = recommendations[bestStream];
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
                         <div class="stream">Recommended Stream: ${bestStream.charAt(0).toUpperCase() + bestStream.slice(1)}</div>
                         <div style="margin:1rem 0;">${rec.why}</div>
                         <div><strong>Example Careers:</strong> ${rec.careers}</div>
@@ -206,7 +274,8 @@
                         <div class="confidence">Confidence Score: ${confidence}%</div>
                         <div style="margin-top:1rem;color:#167BF5;font-weight:bold;">Keep exploring, learning, and believing in yourself. Your future is bright!</div>
                     `;
-                };
+        };
     </script>
 </body>
+
 </html>
