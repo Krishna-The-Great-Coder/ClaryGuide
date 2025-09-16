@@ -104,6 +104,10 @@
             <td>
               <button class="btn btn-success btn-sm" onclick="updateRequestStatus('${key}', 'Accepted')">Accept</button>
               <button class="btn btn-danger btn-sm" onclick="updateRequestStatus('${key}', 'Rejected')">Reject</button>
+              <div class="mt-2">
+                <input type="text" id="meetingLink-${key}" class="form-control form-control-sm mb-1" placeholder="Meeting Link" value="${req.meetingLink || ''}" />
+                <button class="btn btn-primary btn-sm" onclick="sendMeetingLink('${key}')">Send Link</button>
+              </div>
             </td>
           </tr>`;
         });
@@ -114,6 +118,17 @@
     window.updateRequestStatus = function(key, status) {
       db.ref('request/' + key).update({ status });
       document.getElementById('status-' + key).innerText = status;
+    };
+
+    // Send meeting link
+    window.sendMeetingLink = function(key) {
+      const link = document.getElementById('meetingLink-' + key).value.trim();
+      db.ref('request/' + key).update({ meetingLink: link });
+      // Optionally, show a quick confirmation
+      document.getElementById('meetingLink-' + key).style.backgroundColor = '#d4edda';
+      setTimeout(() => {
+        document.getElementById('meetingLink-' + key).style.backgroundColor = '';
+      }, 1000);
     };
   </script>
 </body>

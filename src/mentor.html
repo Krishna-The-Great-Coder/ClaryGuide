@@ -226,8 +226,8 @@
             <button type="submit">Send Request</button>
             <div id="mentorSuccess" style="color:green;margin-top:10px;"></div>
             <div id="mentorError" style="color:red;margin-top:10px;"></div>
-            <div id="userRequests" style="margin-top:30px;"></div>
         </form>
+        <div id="userRequests" style="margin-top:30px;"></div>
     </section>
 
 
@@ -249,6 +249,7 @@
 
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script>
         // Show user's requests and status
         function showUserRequests(email) {
@@ -270,12 +271,6 @@
                 }
             });
         }
-
-        // Try to show requests for logged-in user (by email)
-        document.getElementById('mentorEmail').addEventListener('blur', function() {
-            const email = this.value.trim();
-            if (email) showUserRequests(email);
-        });
         // Firebase config (reuse from script.js)
         const firebaseConfig = {
             apiKey: "AIzaSyBPgF0eZpGKOt35or9KX7Yx0FqLh2DhZeg",
@@ -291,7 +286,34 @@
             firebase.initializeApp(firebaseConfig);
         }
         const db = firebase.database();
-        // Mentor form submission
+
+        // On page load, check auth and request status
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user && user.email) {
+                // Auto-fill email field and disable editing
+                const emailField = document.getElementById('mentorEmail');
+                emailField.value = user.email;
+                emailField.readOnly = true;
+                // Check for existing request
+                db.ref('request').orderByChild('email').equalTo(user.email).once('value', snapshot => {
+                    const requests = snapshot.val();
+                    if (requests) {
+                        // Show the request and status
+                        const req = Object.values(requests)[0];
+                        showSingleRequest(req);
+                        document.getElementById('mentorForm').style.display = 'none';
+                    } else {
+                        document.getElementById('mentorForm').style.display = '';
+                        document.getElementById('userRequests').innerHTML = '';
+                    }
+                });
+            } else {
+                // Not logged in, redirect to login page
+                window.location.href = 'login.html';
+            }
+        });
+
+
         document.getElementById('mentorForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const name = document.getElementById('mentorName').value.trim();
@@ -302,6 +324,13 @@
             const area = document.getElementById('mentorArea').value;
             const about = document.getElementById('about').value.trim();
             const reason = document.getElementById('reason').value.trim();
+            // Before submitting, check if user already has a request
+            const existingReqSnap = await db.ref('request').orderByChild('email').equalTo(email).once('value');
+            if (existingReqSnap.exists()) {
+                document.getElementById('mentorError').innerText = 'You have already sent a request.';
+                document.getElementById('mentorSuccess').innerText = '';
+                return;
+            }
             const requestData = {
                 name,
                 email,
@@ -317,9 +346,15 @@
                 const ref = await db.ref('request').push(requestData);
                 document.getElementById('mentorSuccess').innerText = 'Request sent successfully!';
                 document.getElementById('mentorError').innerText = '';
-                // Hide form and show request data
                 document.getElementById('mentorForm').style.display = 'none';
-                showSingleRequest(requestData);
+                // Immediately fetch and show the request from DB (ensures status/meeting link updates)
+                db.ref('request').orderByChild('email').equalTo(email).once('value', snapshot => {
+                    const requests = snapshot.val();
+                    if (requests) {
+                        const req = Object.values(requests)[0];
+                        showSingleRequest(req);
+                    }
+                });
             } catch (err) {
                 document.getElementById('mentorError').innerText = 'Error sending request. Please try again.';
                 document.getElementById('mentorSuccess').innerText = '';
@@ -338,7 +373,8 @@
                     <strong>Area:</strong> ${req.area || ''} <br>
                     <strong>About:</strong> ${req.about || ''} <br>
                     <strong>Reason:</strong> ${req.reason || ''} <br>
-                    <strong>Status:</strong> <span style="font-weight:bold;color:#888">Pending</span>
+                    <strong>Status:</strong> <span style="font-weight:bold;color:${req.status==='Accepted'?'green':req.status==='Rejected'?'red':'#888'}">${req.status || 'Pending'}</span><br>
+                    ${req.meetingLink ? `<strong>Meeting Link:</strong> <a href='${req.meetingLink}' target='_blank'>${req.meetingLink}</a>` : ''}
                 </div></div>`;
         }
     </script>
