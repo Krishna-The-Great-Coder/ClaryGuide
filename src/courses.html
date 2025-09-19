@@ -1,11 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Clarity Today, Career Tommorow" />
+    <meta property="og:title" content="ClaryGuide" />
+    <meta property="og:description" content="Clarity Today, Career Tommorow" />
+    <meta property="og:image" content="logo.png" />
+    <link rel="icon" href="logo-favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="style.css" />
     <title>ClaryGuide</title>
 </head>
-<body>
-    
+
+<body data-page="home">
+
+    <div style="padding-bottom: 500px;">
+        <!-- Header / Nav (shared across pages) -->
+        <header class="site-header">
+            <div class="brand" href="index.html">
+                <div class="logo">
+                    <img src="logo-favicon.png" style="height: 35px;">
+                </div>
+                <div class="brand-text">
+                    <h1>ClaryGuide</h1>
+                    <p class="tag">Clarity Today, Career Tommorow</p>
+                </div>
+            </div>
+
+            <nav class="main-nav" aria-label="Main">
+                <a href="index.html" style="color: rgb(59, 18, 98);"><b>Home</b></a>
+                <a href="features.html">Features</a>
+                <a href="chatbot.html">ClaryBot</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact Us</a>
+            </nav>
+
+            <!-- Profile icon -->
+            <a href="profile.html" title="Your Profile" style="margin-left: 16px;">
+                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/person-circle.svg" alt="Profile"
+                    style="height:36px;width:36px;vertical-align:middle;">
+            </a>
+
+            <button id="mobileMenuBtn" class="mobile-menu" aria-label="Open menu">☰</button>
+        </header>
+
+        <!-- Mobile Drawer (shared) -->
+        <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+            <button id="closeDrawer" class="close-drawer" aria-label="Close menu">✕</button>
+            <nav class="drawer-nav">
+                <a href="index.html">Home</a><br>
+                <a href="features.html">Features</a><br>
+                <a href="chatbot.html">ClaryBot</a><br>
+                <a href="about.html">About Us</a><br>
+                <a href="contact.html">Contact Us</a><br>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer
+        style="background: #f7fdfc; color: #6b7280; text-align: center; padding: 24px 0; font-size: 15px; margin-top: 40px; border-top: 1px solid #e0e7ef;">
+        <div
+            style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="logo-favicon.png" alt="ClaryGuide Logo" style="width: 32px; vertical-align: middle;">
+                <span style="font-weight: 700; color: #2B8BFF;">ClaryGuide</span>
+            </div>
+            <div style="display: flex; gap: 18px; flex-wrap: wrap;">
+                <a href="index.html" style="color: #6b7280; text-decoration: none;">Home</a>
+                <a href="about.html" style="color: #6b7280; text-decoration: none;">About Us</a>
+                <a href="features.html" style="color: #6b7280; text-decoration: none;">Features</a>
+                <a href="chatbot.html" style="color: #6b7280; text-decoration: none;">ClaryBot</a>
+                <a href="contact.html" style="color: #6b7280; text-decoration: none;">Contact</a>
+            </div>
+            <div style="font-size: 13px; color: #8D44FF;">&copy; 2025 ClaryGuide. All rights reserved.</div>
+        </div>
+    </footer>
 </body>
+
 </html>
