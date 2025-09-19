@@ -454,23 +454,6 @@ body {
     color: white
 }
 
-/* footer */
-.site-footer {
-    margin-top: 36px;
-    padding: 18px 0;
-    background: transparent
-}
-
-.footer-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--muted);
-    font-size: 13px
-}
 
 /* mobile drawer */
 .mobile-drawer {
