@@ -15,6 +15,49 @@ const auth = firebase.auth();
 const db = firebase.database();
 
 document.addEventListener('DOMContentLoaded', function () {
+  // AI Chatbot logic for chatbot.html
+  if (document.body.dataset.page === 'chatbot') {
+    const chatDemo = document.getElementById('chatDemo');
+    const chatDemoForm = document.getElementById('chatDemoForm');
+    const chatDemoInput = document.getElementById('chatDemoInput');
+    const chatDemoLoading = document.getElementById('chatDemoLoading');
+    if (chatDemo && chatDemoForm && chatDemoInput && chatDemoLoading) {
+      chatDemoForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const userMsg = chatDemoInput.value.trim();
+        if (!userMsg) return;
+        // Show user message
+        const userDiv = document.createElement('div');
+        userDiv.className = 'user-msg';
+        userDiv.textContent = userMsg;
+        chatDemo.appendChild(userDiv);
+        chatDemoInput.value = '';
+        chatDemoLoading.style.display = 'block';
+        // Send to backend AI API
+        try {
+          const res = await fetch('/api/chatbot', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: userMsg })
+          });
+          const data = await res.json();
+          chatDemoLoading.style.display = 'none';
+          let botReply = data.reply || 'Sorry, I could not understand. Please try again.';
+          const botDiv = document.createElement('div');
+          botDiv.className = 'bot-msg';
+          botDiv.textContent = botReply;
+          chatDemo.appendChild(botDiv);
+          chatDemo.scrollTop = chatDemo.scrollHeight;
+        } catch (err) {
+          chatDemoLoading.style.display = 'none';
+          const botDiv = document.createElement('div');
+          botDiv.className = 'bot-msg';
+          botDiv.textContent = 'Error connecting to AI. Please try again later.';
+          chatDemo.appendChild(botDiv);
+        }
+      });
+    }
+  }
   // AUTH: Register
   const registerForm = document.getElementById('registerForm');
   if (registerForm) {
