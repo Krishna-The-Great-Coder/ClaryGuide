@@ -214,20 +214,39 @@
     <!-- Career Comparison Tool -->
     <div class="comparison-section" style="text-align: center;">
         <h3>Career Comparison Tool</h3>
-        <p>Select two careers to compare their scope, skills, and opportunities.</p>
+        <p>Select two careers to compare their<br> Scope, Skills needed, Opportunities, Fresher's package, Avg. package,
+            Highest package.</p>
 
         <select id="career1">
-            <option value="engineer">Engineer</option>
-            <option value="doctor">Doctor</option>
-            <option value="designer">Designer</option>
-            <option value="lawyer">Lawyer</option>
+            <option style="text-align: center;">Select Career 1</option>
+            <option value="engineer1">Software Engineer / Data Scientist</option>
+            <option value="engineer2">Aerospace / Robotics Engineer</option>
+            <option value="doctor1">Doctor (MBBS/MD)</option>
+            <option value="doctor2">Biotechnologist / Genetic Engineer</option>
+            <option value="commerce1">Chartered Accountant (CA/CFA)</option>
+            <option value="commerce2">Investment Banker</option>
+            <option value="arts1">Corporate / IP Lawyer</option>
+            <option value="arts2">Psychologist / Therapist</option>
+            <option value="digital1">Animation / VFX Artist</option>
+            <option value="digital2">Social Media Marketer</option>
+            <option value="creative1">Fashion Designer</option>
+            <option value="creative2">YouTube Creator</option>
         </select>
 
         <select id="career2">
-            <option value="doctor">Doctor</option>
-            <option value="engineer">Engineer</option>
-            <option value="designer">Designer</option>
-            <option value="lawyer">Lawyer</option>
+            <option style="text-align: center;">Select Career 2</option>
+            <option value="engineer1">Software Engineer / Data Scientist</option>
+            <option value="engineer2">Aerospace / Robotics Engineer</option>
+            <option value="doctor1">Doctor (MBBS/MD)</option>
+            <option value="doctor2">Biotechnologist / Genetic Engineer</option>
+            <option value="commerce1">Chartered Accountant (CA/CFA)</option>
+            <option value="commerce2">Investment Banker</option>
+            <option value="arts1">Corporate / IP Lawyer</option>
+            <option value="arts2">Psychologist / Therapist</option>
+            <option value="digital1">Animation / VFX Artist</option>
+            <option value="digital2">Social Media Marketer</option>
+            <option value="creative1">Fashion Designer</option>
+            <option value="creative2">YouTube Creator</option>
         </select>
 
         <br>
@@ -252,51 +271,144 @@
         </form>
     </div>
 
-           <!-- Footer -->
-        <footer style="background: #f7fdfc; color: #6b7280; text-align: center; padding: 24px 0; font-size: 15px; margin-top: 40px; border-top: 1px solid #e0e7ef;">
-            <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <img src="logo-favicon.png" alt="ClaryGuide Logo" style="width: 32px; vertical-align: middle;">
-                    <span style="font-weight: 700; color: #2B8BFF;">ClaryGuide</span>
-                </div>
-                <div style="display: flex; gap: 18px; flex-wrap: wrap;">
-                    <a href="about.html" style="color: #6b7280; text-decoration: none;">About Us</a>
-                    <a href="features.html" style="color: #6b7280; text-decoration: none;">Features</a>
-                    <a href="chatbot.html" style="color: #6b7280; text-decoration: none;">ClaryBot</a>
-                    <a href="contact.html" style="color: #6b7280; text-decoration: none;">Contact</a>
-                </div>
-                <div style="font-size: 13px; color: #8D44FF;">&copy; 2025 ClaryGuide. All rights reserved.</div>
+    <!-- Footer -->
+    <footer
+        style="background: #f7fdfc; color: #6b7280; text-align: center; padding: 24px 0; font-size: 15px; margin-top: 40px; border-top: 1px solid #e0e7ef;">
+        <div
+            style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="logo-favicon.png" alt="ClaryGuide Logo" style="width: 32px; vertical-align: middle;">
+                <span style="font-weight: 700; color: #2B8BFF;">ClaryGuide</span>
             </div>
-        </footer>
+            <div style="display: flex; gap: 18px; flex-wrap: wrap;">
+                <a href="index.html" style="color: #6b7280; text-decoration: none;">Home</a>
+                <a href="about.html" style="color: #6b7280; text-decoration: none;">About Us</a>
+                <a href="features.html" style="color: #6b7280; text-decoration: none;">Features</a>
+                <a href="chatbot.html" style="color: #6b7280; text-decoration: none;">ClaryBot</a>
+                <a href="contact.html" style="color: #6b7280; text-decoration: none;">Contact</a>
+            </div>
+            <div style="font-size: 13px; color: #8D44FF;">&copy; 2025 ClaryGuide. All rights reserved.</div>
+        </div>
+    </footer>
 
 
 
     <script src="script.js"></script>
     <script>
         const data = {
-            engineer: {
-                title: "Engineer",
-                scope: "Technology, infrastructure, software, manufacturing.",
-                skills: "Problem solving, mathematics, programming, design thinking.",
-                opportunities: "IT companies, R&D, startups, government projects."
+
+            engineer1: {
+                title: "Software Engineer / Data Scientist",
+                scope: "Technology, AI, cloud computing, big data, product development.",
+                skills: "Coding (Python, C++), problem-solving, mathematics, logical thinking.",
+                opportunities: "IT companies, startups, freelancing, MNCs.",
+                fresherPackage: "₹4–6 LPA",
+                avgPackage: "₹8–12 LPA (3–5 yrs)",
+                highestPackage: "₹60+ LPA (FAANG/AI Leads)"
             },
-            doctor: {
-                title: "Doctor",
+            engineer2: {
+                title: "Aerospace / Robotics Engineer",
+                scope: "Space technology, automation, EVs, drones, defense.",
+                skills: "Physics, robotics, mechanical design, programming.",
+                opportunities: "ISRO, DRDO, robotics startups, private aerospace firms.",
+                fresherPackage: "₹3.5–5 LPA",
+                avgPackage: "₹6–10 LPA (3–5 yrs)",
+                highestPackage: "₹40+ LPA (Private Aerospace Giants)"
+            },
+
+            doctor1: {
+                title: "Doctor (MBBS/MD)",
                 scope: "Healthcare, hospitals, research, clinics.",
-                skills: "Medical knowledge, empathy, critical thinking, decision making.",
-                opportunities: "Hospitals, private practice, research labs, pharma."
+                skills: "Medical knowledge, empathy, decision-making, patience.",
+                opportunities: "Hospitals, private practice, research labs, pharma.",
+                fresherPackage: "₹6–8 LPA (after internship)",
+                avgPackage: "₹10–15 LPA",
+                highestPackage: "₹1+ Cr/yr (Top Specialists)"
             },
-            designer: {
-                title: "Designer",
-                scope: "Creative industries, digital media, product design.",
-                skills: "Creativity, tools like Figma/Photoshop, UX thinking.",
-                opportunities: "Design studios, startups, freelancing, corporates."
+            doctor2: {
+                title: "Biotechnologist / Genetic Engineer",
+                scope: "Biotech research, genetic modification, agriculture, pharma.",
+                skills: "Lab work, research analysis, problem-solving.",
+                opportunities: "Pharma companies, biotech labs, research institutes.",
+                fresherPackage: "₹3–4 LPA",
+                avgPackage: "₹6–8 LPA",
+                highestPackage: "₹35+ LPA (R&D Heads)"
             },
-            lawyer: {
-                title: "Lawyer",
-                scope: "Legal practice, corporate law, judiciary.",
+
+            commerce1: {
+                title: "Chartered Accountant (CA/CFA)",
+                scope: "Finance, taxation, audit, corporate consulting.",
+                skills: "Accounting, business law, risk analysis.",
+                opportunities: "MNCs, Big 4 firms, consulting companies, entrepreneurship.",
+                fresherPackage: "₹6–8 LPA",
+                avgPackage: "₹10–15 LPA",
+                highestPackage: "₹50+ LPA (CFO/Big 4 Partners)"
+            },
+            commerce2: {
+                title: "Investment Banker",
+                scope: "Banking, private equity, mergers & acquisitions, IPOs.",
+                skills: "Financial modeling, analytics, negotiation.",
+                opportunities: "Investment banks, PE/VC firms, corporate finance.",
+                fresherPackage: "₹10–12 LPA",
+                avgPackage: "₹18–25 LPA",
+                highestPackage: "₹1 Cr+/yr (VP/Director)"
+            },
+
+            arts1: {
+                title: "Corporate / IP Lawyer",
+                scope: "Corporate law, intellectual property, compliance, litigation.",
                 skills: "Legal knowledge, analytical thinking, communication.",
-                opportunities: "Law firms, corporates, courts, consultancy."
+                opportunities: "Law firms, corporates, courts, consultancy.",
+                fresherPackage: "₹4–5 LPA",
+                avgPackage: "₹8–12 LPA",
+                highestPackage: "₹40+ LPA (Top Tier Partners)"
+            },
+            arts2: {
+                title: "Psychologist / Therapist",
+                scope: "Mental health, counseling, corporate wellness.",
+                skills: "Counseling, empathy, active listening, psychology theories.",
+                opportunities: "Hospitals, schools, corporate wellness programs, private practice.",
+                fresherPackage: "₹2–3 LPA",
+                avgPackage: "₹4–6 LPA",
+                highestPackage: "₹20+ LPA (Celebrity/Corporate Psychologists)"
+            },
+
+            digital1: {
+                title: "Animation / VFX Artist",
+                scope: "Entertainment industry, gaming, films, OTT platforms.",
+                skills: "Maya, Blender, After Effects, creativity.",
+                opportunities: "Film studios, ad agencies, gaming companies.",
+                fresherPackage: "₹2.5–4 LPA",
+                avgPackage: "₹5–7 LPA",
+                highestPackage: "₹25+ LPA (VFX Directors)"
+            },
+            digital2: {
+                title: "Social Media Marketer",
+                scope: "Digital marketing, brand strategy, online growth.",
+                skills: "Content creation, analytics, ad campaigns, copywriting.",
+                opportunities: "Agencies, startups, corporates, freelancing.",
+                fresherPackage: "₹2–3.5 LPA",
+                avgPackage: "₹5–8 LPA",
+                highestPackage: "₹20+ LPA (Brand Managers, CMOs)"
+            },
+
+            creative1: {
+                title: "Fashion Designer",
+                scope: "Fashion industry, luxury brands, personal styling.",
+                skills: "Designing, sketching, trend forecasting.",
+                opportunities: "Fashion houses, own label, celebrity styling.",
+                fresherPackage: "₹3–4 LPA",
+                avgPackage: "₹6–10 LPA",
+                highestPackage: "₹50+ LPA (Celebrity Designers)"
+            },
+            creative2: {
+                title: "YouTube Creator",
+                scope: "Content creation, influencer marketing, personal brand building.",
+                skills: "Video editing, creativity, communication, consistency.",
+                opportunities: "YouTube, sponsorships, own products/business.",
+                fresherPackage: "₹20k–50k/month (early growth stage)",
+                avgPackage: "₹1–3 L/month (after 1–2 yrs growth)",
+                highestPackage: "₹5 Cr+/yr (Top YouTubers)"
             }
         };
 
@@ -309,14 +421,20 @@
         <div class="career-box">
           <h4>${data[c1].title}</h4>
           <p><b>Scope:</b> ${data[c1].scope}</p>
-          <p><b>Skills:</b> ${data[c1].skills}</p>
+          <p><b>Skills Needed:</b> ${data[c1].skills}</p>
           <p><b>Opportunities:</b> ${data[c1].opportunities}</p>
+          <p><b>Fresher's Package (India):</b> ${data[c1].fresherPackage}</p>
+          <p><b>Average Package (3–5 yrs):</b> ${data[c1].avgPackage}</p>
+          <p><b>Highest's Package (India):</b> ${data[c1].highestPackage}</p>
         </div>
         <div class="career-box">
           <h4>${data[c2].title}</h4>
           <p><b>Scope:</b> ${data[c2].scope}</p>
-          <p><b>Skills:</b> ${data[c2].skills}</p>
+          <p><b>Skills Needed:</b> ${data[c2].skills}</p>
           <p><b>Opportunities:</b> ${data[c2].opportunities}</p>
+          <p><b>Fresher's Package (India):</b> ${data[c2].fresherPackage}</p>
+          <p><b>Average Package (3–5 yrs):</b> ${data[c2].avgPackage}</p>
+          <p><b>Highest's Package (India):</b> ${data[c2].highestPackage}</p>
         </div>
       `;
         }
